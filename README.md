@@ -1,1 +1,3 @@
-# CRUD-Servlet-JSP-Hibernate-MySql
+# About
+Author: SuongNguyen
+Email: suongnguyenytm2001@gmail.com
