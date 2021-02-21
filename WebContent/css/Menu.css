@@ -1,0 +1,22 @@
+* {
+	font-size: 10px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+	text-decoration: none;
+}
+
+.menu {
+	display: flex;
+	max-width: 80%;
+	line-height: 40px;
+	margin: auto;
+	justify-content: space-between;
+}
+
+.menu__link {
+	font-size: 2rem;
+	color: black;
+}
