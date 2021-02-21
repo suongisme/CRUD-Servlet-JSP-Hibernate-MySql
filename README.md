@@ -1,3 +1,3 @@
 # About
-Author: SuongNguyen
-Email: suongnguyenytm2001@gmail.com
+- Author: SuongNguyen
+- Email: suongnguyenytm2001@gmail.com
