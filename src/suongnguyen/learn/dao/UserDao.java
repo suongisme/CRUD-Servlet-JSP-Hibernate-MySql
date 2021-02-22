@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import suongnguyen.learn.model.Product;
 import suongnguyen.learn.model.User;
 
 public class UserDao implements DAO<String, User>{
@@ -72,5 +73,4 @@ public class UserDao implements DAO<String, User>{
 		}
 		return userList;
 	}
-
 }
