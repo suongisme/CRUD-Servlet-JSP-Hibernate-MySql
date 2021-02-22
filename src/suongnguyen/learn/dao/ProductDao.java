@@ -13,12 +13,14 @@ public class ProductDao implements DAO<Integer, Product>{
 	@Override
 	public void submit(Product data) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
+		Transaction transaction = session.getTransaction();
 		try {
+			transaction.begin();
 			session.saveOrUpdate(data);
 			transaction.commit();
 			session.close();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			transaction.rollback();
 		} finally {
 			session.close();
@@ -30,7 +32,7 @@ public class ProductDao implements DAO<Integer, Product>{
 		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			Product product = session.find(Product.class, id);
+			Product product = session.get(Product.class, id);
 			session.delete(product);
 			transaction.commit();
 			session.close();
@@ -48,7 +50,7 @@ public class ProductDao implements DAO<Integer, Product>{
 		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			product = session.find(Product.class, id);
+			product = session.find(Product.class, 1);
 			transaction.commit();
 		} catch (Exception e) {
 			transaction.rollback();
@@ -62,8 +64,9 @@ public class ProductDao implements DAO<Integer, Product>{
 	public List<Product> getAll() {
 		List<Product> listProduct = null;
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
+		Transaction transaction = session.getTransaction();
 		try {
+			transaction.begin();
 			listProduct = session.createQuery("FROM Product").list();
 			transaction.commit();
 		} catch (Exception e) {
@@ -74,5 +77,4 @@ public class ProductDao implements DAO<Integer, Product>{
 		
 		return listProduct;
 	}
-
 }
