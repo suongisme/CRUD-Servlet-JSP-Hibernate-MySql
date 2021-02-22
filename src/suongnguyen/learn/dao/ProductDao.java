@@ -8,7 +8,7 @@ import org.hibernate.Session;
 
 import suongnguyen.learn.model.Product;
 
-public class ProductDao implements DAO<String, Product>{
+public class ProductDao implements DAO<Integer, Product>{
 
 	@Override
 	public void submit(Product data) {
@@ -23,11 +23,10 @@ public class ProductDao implements DAO<String, Product>{
 		} finally {
 			session.close();
 		}
-		
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
@@ -44,9 +43,19 @@ public class ProductDao implements DAO<String, Product>{
 	}
 
 	@Override
-	public Product getById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product getById(Integer id) {
+		Product product = null;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			product = session.find(Product.class, id);
+			transaction.commit();
+		} catch (Exception e) {
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return product;
 	}
 
 	@Override
@@ -62,8 +71,6 @@ public class ProductDao implements DAO<String, Product>{
 		} finally {
 			session.close();
 		}
-		
-		
 		
 		return listProduct;
 	}
