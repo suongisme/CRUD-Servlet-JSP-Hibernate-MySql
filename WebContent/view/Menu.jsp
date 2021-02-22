@@ -11,8 +11,9 @@
 </head>
 <body>
 	<div class="menu">
-		<a class="menu__link" href="#"> Profile </a>
-		<a class="menu__link" href="#"> Product </a>
+		<a class="menu__link" href="${ context }/profile"> Profile </a>
+		<a class="menu__link" href="${ context }/products"> Product </a>
+		<a class="menu__link" href="${ context }/users"> User </a>
 		<a class="menu__link" href="${ context }/logout"> Logout </a>
 	</div>
 </body>

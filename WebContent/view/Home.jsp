@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="Menu.jsp"></jsp:include>	
+	<jsp:include page="/view/Menu.jsp"></jsp:include>	
 	<div class="body">
 		
 	</div>

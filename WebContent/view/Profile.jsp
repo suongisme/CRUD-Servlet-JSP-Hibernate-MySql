@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="Menu.jsp"/>
+	<jsp:include page="/view/Menu.jsp"/>
 	<div class="profile">
 		<h1>Hello ${user.getUsername()}</h1>
 	</div>

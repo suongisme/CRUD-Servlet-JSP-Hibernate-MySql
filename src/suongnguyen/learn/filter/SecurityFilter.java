@@ -24,14 +24,20 @@ public class SecurityFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		
 		User user = (User) session.getAttribute("info_login");
+		
+		String servletPath = req.getServletPath();
+		servletPath = servletPath.equals("/logout") ? "/home" : servletPath;
+		String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
+		
 		if (user == null) {
-			String servletPath = req.getServletPath();
-			String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
 			session.setAttribute("link", servletPath+pathInfo);
 			((HttpServletResponse) response).sendRedirect(req.getContextPath()+"/login");
+			return;
 		} 
 		chain.doFilter(request, response);
 	}

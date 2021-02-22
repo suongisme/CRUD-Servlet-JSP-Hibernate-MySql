@@ -12,14 +12,14 @@ import javax.persistence.Table;
 public class Product {
 	
 	@Id
-	@Column(name = "product_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
 	@Column(name = "name", length = 100)
 	private String name;
 	
-	@Column(name = "desc", length = 300)
+	@Column(name = "description", length = 300)
 	private String desc;
 	
 	@Column(name = "price")

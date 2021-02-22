@@ -12,8 +12,11 @@
 
 	<filter-mapping>
 		<filter-name>security</filter-name>
-		<url-pattern>/product</url-pattern>
-		<url-pattern>/user</url-pattern>
+		<url-pattern>/products/*</url-pattern>
+		<url-pattern>/home</url-pattern>
+		<url-pattern>/users/*</url-pattern>
+		<url-pattern>/profile</url-pattern>
+		<url-pattern>/logout</url-pattern>
 	</filter-mapping>
 	
 	<servlet>
@@ -23,15 +26,16 @@
 
 	<servlet-mapping>
 		<servlet-name>home</servlet-name>
-		<url-pattern>/house</url-pattern>
+		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>profile</servlet-name>
+		<jsp-file>/view/Profile.jsp</jsp-file>
+	</servlet>
 
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>profile</servlet-name>
+		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
 </web-app>
