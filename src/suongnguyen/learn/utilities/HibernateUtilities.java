@@ -6,14 +6,19 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.mysql.cj.Session;
+
 public class HibernateUtilities {
-	
+
+	private static SessionFactory sessionFactory;
+
 	public static SessionFactory getSessionFactory() {
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
-									  .configure()
-									  .build();
-		MetadataSources ms = new MetadataSources( ssr );
-		Metadata m = ms.buildMetadata();
-		return m.buildSessionFactory();
+		if (sessionFactory == null) {
+			StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+			MetadataSources ms = new MetadataSources(ssr);
+			sessionFactory = ms.buildMetadata().buildSessionFactory();
+		}
+
+		return sessionFactory;
 	}
 }

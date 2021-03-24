@@ -16,7 +16,6 @@
 		<url-pattern>/home</url-pattern>
 		<url-pattern>/users/*</url-pattern>
 		<url-pattern>/profile</url-pattern>
-		<url-pattern>/logout</url-pattern>
 	</filter-mapping>
 	
 	<servlet>
@@ -37,5 +36,25 @@
 	<servlet-mapping>
 		<servlet-name>profile</servlet-name>
 		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>notfound</servlet-name>
+		<jsp-file>/view/NotFound.html</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>notfound</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>

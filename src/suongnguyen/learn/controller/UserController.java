@@ -1,7 +1,6 @@
 package suongnguyen.learn.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import suongnguyen.learn.dao.UserDao;
 import suongnguyen.learn.model.User;
+import suongnguyen.learn.service.UserService;
+import suongnguyen.learn.serviceimpl.UserServiceImpl;
 
 @WebServlet("/users/*")
 public class UserController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	private UserDao userDao;
+	private UserService userService;
 	
 	@Override
 	public void init() throws ServletException {
-		userDao = new UserDao();
+		userService = new UserServiceImpl();
 	}
 	
 	@Override
@@ -32,17 +32,19 @@ public class UserController extends HttpServlet{
 			String username = pathInfo.substring(1);
 			String isDelete = req.getParameter("delete");
 			if ("true".equals(isDelete)) {
-				userDao.delete(username);
+				userService.delete(username);
 			}
 		}
 		
-		req.setAttribute("users", userDao.getAll());
-		req.getRequestDispatcher("view/User.jsp").forward(req, resp);
+		req.setAttribute("users", userService.getAll());
+		req.getRequestDispatcher("/view/User.jsp").forward(req, resp);
 	}
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		
@@ -50,9 +52,9 @@ public class UserController extends HttpServlet{
 		user.setUsername(username);
 		user.setPassword(password);
 		
-		userDao.submit(user);
-		req.setAttribute("users", userDao.getAll());
-		req.getRequestDispatcher("view/User.jsp").forward(req, resp);
+		userService.submit(user);
+		req.setAttribute("users", userService.getAll());
+		req.getRequestDispatcher("/view/User.jsp").forward(req, resp);
 	
 	}
 

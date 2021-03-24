@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="false"%>
+<%@ include file="Menu.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +28,10 @@
 </style>
 </head>
 <body>
-	<jsp:include page="/view/Menu.jsp"/>
 	<div class="body">
 		<span>
 			You have successfully logged out.
-			<a href="login">login</a> here
+			<a href="${ pageContext.request.contextPath }/login">login</a> here
 		</span>
 	</div>
 </body>

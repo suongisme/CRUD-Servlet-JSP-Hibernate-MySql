@@ -7,8 +7,10 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/HibernateCRUD</property>
 		<property name="hibernate.connection.user">admin</property>
 		<property name="hibernate.connection.password">Admin@admin123</property>
+		
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.format_sql">true</property>
+		
 		<property name="hiberanate.pool_size">1</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
 		

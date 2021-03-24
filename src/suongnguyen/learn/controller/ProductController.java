@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import suongnguyen.learn.dao.ProductDao;
 import suongnguyen.learn.model.Product;
+import suongnguyen.learn.service.ProductService;
+import suongnguyen.learn.serviceimpl.ProductServiceImpl;
 
 @WebServlet("/products/*")
 public class ProductController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private ProductDao productDao;
+	private ProductService productService;
 	
 	@Override
 	public void init() throws ServletException {
-		productDao = new ProductDao();
+		productService = new ProductServiceImpl();
 	}
 
 	@Override
@@ -31,11 +32,11 @@ public class ProductController extends HttpServlet{
 			int id = Integer.parseInt(pathInfo.substring(1).trim());
 			String isDelete = req.getParameter("delete");
 			if ("true".equals(isDelete)) {
-				productDao.delete(id);
+				productService.delete(id);
 			} 
 		} 
 		
-		req.setAttribute("products", productDao.getAll());
+		req.setAttribute("products", productService.getAll());
 		req.getRequestDispatcher("/view/Product.jsp").forward(req, resp);
 	}
 	
@@ -47,16 +48,17 @@ public class ProductController extends HttpServlet{
 		String name = req.getParameter("Name");
 		String price = req.getParameter("Price");
 		String desc = req.getParameter("Description");
-		System.out.println(id);
+
 		Product product = new Product();
-		if (!(id.equals(""))) product.setId(Integer.parseInt(id));
+		if (!(id.isEmpty())) product.setId(Integer.parseInt(id));
+		
 		product.setName(name);
 		product.setPrice(Integer.parseInt(price));
 		product.setDesc(desc);
 		
-		productDao.submit(product);
-		req.setAttribute("products", productDao.getAll());
-		req.getRequestDispatcher("view/Product.jsp").forward(req, resp);
+		productService.submit(product);
+		req.setAttribute("products", productService.getAll());
+		req.getRequestDispatcher("/view/Product.jsp").forward(req, resp);
 	
 	}
 }

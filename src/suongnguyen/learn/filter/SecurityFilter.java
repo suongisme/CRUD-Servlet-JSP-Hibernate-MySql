@@ -31,7 +31,6 @@ public class SecurityFilter implements Filter{
 		User user = (User) session.getAttribute("info_login");
 		
 		String servletPath = req.getServletPath();
-		servletPath = servletPath.equals("/logout") ? "/home" : servletPath;
 		String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
 		
 		if (user == null) {

@@ -1,18 +1,23 @@
-package suongnguyen.learn.dao;
+package suongnguyen.learn.daoimpl;
 
 import java.util.List;
 
 import org.hibernate.Transaction;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import suongnguyen.learn.dao.ProductDAO;
 import suongnguyen.learn.model.Product;
+import suongnguyen.learn.utilities.HibernateUtilities;
 
-public class ProductDao implements DAO<Integer, Product>{
+public class ProductDaoImpl implements ProductDAO{
 
+	SessionFactory sessionFactory = HibernateUtilities.getSessionFactory();
+	
 	@Override
 	public void submit(Product data) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
@@ -29,7 +34,7 @@ public class ProductDao implements DAO<Integer, Product>{
 
 	@Override
 	public void delete(Integer id) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			Product product = session.get(Product.class, id);
@@ -47,7 +52,7 @@ public class ProductDao implements DAO<Integer, Product>{
 	@Override
 	public Product getById(Integer id) {
 		Product product = null;
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			product = session.find(Product.class, 1);
@@ -60,10 +65,11 @@ public class ProductDao implements DAO<Integer, Product>{
 		return product;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> getAll() {
 		List<Product> listProduct = null;
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
